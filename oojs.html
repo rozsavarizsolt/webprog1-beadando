@@ -1,1 +1,43 @@
-<!-- ide jön a teljes oojs.html tartalom -->
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React SPA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="tablazat.html">Táblázat</a></li>
+            <li><a href="html5.html">HTML5 API</a></li>
+            <li><a href="chartjs.html">ChartJS</a></li>
+            <li><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+            <li class="active"><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+
+    <aside>
+        <p>React SPA</p>
+    </aside>
+
+    <div id="content">
+        <div id="root"></div>
+    </div>
+
+    <footer>
+        <p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p>
+    </footer>
+
+    <script type="text/babel" src="react-app.js"></script>
+</body>
+</html>

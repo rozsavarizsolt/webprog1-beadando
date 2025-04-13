@@ -2,7 +2,7 @@
 
 Ez a projekt a GAMF "Webprogramozás 1" kurzus előadás beadandó feladatának megvalósítása.
 
-##  Tartalom
+## 📂 Tartalom
 
 - Többoldalas egységes weboldal HTML, CSS, JavaScript és React használatával
 - Feladatok külön menüpontban:
@@ -16,14 +16,14 @@ Ez a projekt a GAMF "Webprogramozás 1" kurzus előadás beadandó feladatának 
 ##  Technológiák
 
 - HTML5
-- CSS 
+- CSS (sötét téma)
 - JavaScript
-- React 18 
+- React 18 (standalone)
 - Chart.js
 - Fetch API (AJAX)
+
 
 ##  Szerző
 
 **Rózsavári Zsolt**  
 Neptun kód: D3TOTJ  
-

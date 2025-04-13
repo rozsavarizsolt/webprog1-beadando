@@ -1,1 +1,65 @@
-<!-- ide jön a teljes chartjs.html tartalom -->
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX példa</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="ajax.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Kezdőlap</a></li>
+            <li><a href="tablazat.html">Táblázat</a></li>
+            <li><a href="html5.html">HTML5 API</a></li>
+            <li><a href="chartjs.html">ChartJS</a></li>
+            <li class="active"><a href="ajax.html">AJAX</a></li>
+            <li><a href="oojs.html">OOJS</a></li>
+            <li><a href="react.html">React</a></li>
+        </ul>
+    </nav>
+
+    <aside>
+        <p>AJAX API kapcsolat</p>
+    </aside>
+
+    <div id="content">
+        <h2>AJAX – API használat</h2>
+
+        <section>
+            <h3>Read</h3>
+            <button onclick="loadData()">Adatok betöltése</button>
+            <div id="dataContainer"></div>
+            <div id="stats"></div>
+        </section>
+
+        <section>
+            <h3>Create / Update</h3>
+            <form id="dataForm">
+                <input type="text" id="id" placeholder="ID (update esetén)">
+                <input type="text" id="name" placeholder="Név" required>
+                <input type="text" id="height" placeholder="Magasság" required>
+                <input type="text" id="weight" placeholder="Súly" required>
+                <button type="submit">Mentés</button>
+                <button type="button" onclick="getDataForId()">Adatok betöltése ID alapján</button>
+            </form>
+            <div id="result"></div>
+        </section>
+
+        <section>
+            <h3>Delete</h3>
+            <input type="text" id="deleteId" placeholder="Törlendő ID">
+            <button onclick="deleteData()">Törlés</button>
+        </section>
+    </div>
+
+    <footer>
+        <p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p>
+    </footer>
+</body>
+</html>
