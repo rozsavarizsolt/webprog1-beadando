@@ -1,0 +1,1 @@
+// ide jön az API-val való kommunikáció

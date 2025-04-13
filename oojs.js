@@ -1,0 +1,1 @@
+// ide jön az OO karakter generátor

@@ -1,0 +1,1 @@
+// ide jön a Web Storage, Geolocation stb.

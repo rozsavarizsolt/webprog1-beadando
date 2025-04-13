@@ -1,0 +1,1 @@
+// ide jön a JS a CRUD táblázathoz

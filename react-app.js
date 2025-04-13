@@ -1,0 +1,1 @@
+// ide jön a React SPA két komponenssel
