@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>React SPA</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX példa</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="ajax.js"></script>
 </head>
 <body>
   <header>
@@ -20,24 +18,48 @@
       <li><a href="tablazat.html">Táblázat</a></li>
       <li><a href="html5.html">HTML5 API</a></li>
       <li><a href="chartjs.html">ChartJS</a></li>
-      <li><a href="ajax.html">AJAX</a></li>
+      <li class="active"><a href="ajax.html">AJAX</a></li>
       <li><a href="oojs.html">OOJS</a></li>
-      <li class="active"><a href="react.html">React</a></li>
+      <li><a href="react.html">React</a></li>
     </ul>
   </nav>
 
   <aside>
-    <p>React SPA</p>
+    <p>AJAX API kapcsolat</p>
   </aside>
 
   <div id="content">
-    <div id="root"></div>
+    <h2>AJAX – API használat</h2>
+
+    <section>
+      <h3>Read</h3>
+      <button onclick="loadData()">Adatok betöltése</button>
+      <div id="dataContainer"></div>
+      <div id="stats"></div>
+    </section>
+
+    <section>
+      <h3>Create / Update</h3>
+      <form id="dataForm">
+        <input type="text" id="id" placeholder="ID (csak update-hez)">
+        <input type="text" id="name" placeholder="Név" required>
+        <input type="text" id="height" placeholder="Magasság (cm)" required>
+        <input type="text" id="weight" placeholder="Súly (kg)" required>
+        <button type="submit">Mentés</button>
+        <button type="button" onclick="getDataForId()">Adatok betöltése ID alapján</button>
+      </form>
+      <div id="result"></div>
+    </section>
+
+    <section>
+      <h3>Delete</h3>
+      <input type="text" id="deleteId" placeholder="Törlendő ID">
+      <button onclick="deleteData()">Törlés</button>
+    </section>
   </div>
 
   <footer>
     <p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p>
   </footer>
-
-  <script type="text/babel" src="react-app.js"></script>
 </body>
 </html>
