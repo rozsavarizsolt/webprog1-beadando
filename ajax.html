@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OOJS Példa</title>
+    <title>AJAX példa</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="oojs.js"></script>
+    <script defer src="ajax.js"></script>
 </head>
 <body>
     <header>
@@ -25,13 +25,37 @@
     </nav>
 
     <aside>
-        <p>Objektumorientált JavaScript példa</p>
+        <p>AJAX API kapcsolat</p>
     </aside>
 
     <div id="content">
-        <h2>OO JavaScript – Karakter Generátor</h2>
-        <button onclick="generateCharacter()">Új karakter generálása</button>
-        <div id="characters"></div>
+        <h2>AJAX – API használat</h2>
+
+        <section>
+            <h3>Read</h3>
+            <button onclick="loadData()">Adatok betöltése</button>
+            <div id="dataContainer"></div>
+            <div id="stats"></div>
+        </section>
+
+        <section>
+            <h3>Create / Update</h3>
+            <form id="dataForm">
+                <input type="text" id="id" placeholder="ID (update esetén)">
+                <input type="text" id="name" placeholder="Név" required>
+                <input type="text" id="height" placeholder="Magasság" required>
+                <input type="text" id="weight" placeholder="Súly" required>
+                <button type="submit">Mentés</button>
+                <button type="button" onclick="getDataForId()">Adatok betöltése ID alapján</button>
+            </form>
+            <div id="result"></div>
+        </section>
+
+        <section>
+            <h3>Delete</h3>
+            <input type="text" id="deleteId" placeholder="Törlendő ID">
+            <button onclick="deleteData()">Törlés</button>
+        </section>
     </div>
 
     <footer>
@@ -39,3 +63,6 @@
     </footer>
 </body>
 </html>
+
+
+
