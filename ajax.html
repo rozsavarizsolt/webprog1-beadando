@@ -1,68 +1,52 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJAX példa</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="ajax.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX API példa</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="menu.js"></script>
+  <script defer src="ajax.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Web-programozás-1 Előadás Házi feladat</h1>
-    </header>
+  <header>
+    <h1>Webprogramozás 1 – Előadás beadandó</h1>
+  </header>
+  <nav></nav>
+  <aside><p>AJAX API kapcsolat</p></aside>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Kezdőlap</a></li>
-            <li><a href="tablazat.html">Táblázat</a></li>
-            <li><a href="html5.html">HTML5</a></li>
-            <li><a href="chartjs.html">ChartJS</a></li>
-            <li class="active"><a href="ajax.html">AJAX</a></li>
-            <li><a href="oojs.html">OOJS</a></li>
-            <li><a href="react.html">React</a></li>
-        </ul>
-    </nav>
+  <div id="content">
+    <h2>Read</h2>
+    <button onclick="loadData()">Adatok betöltése</button>
+    <div id="dataContainer"></div>
+    <div id="stats"></div>
 
-    <aside>
-        <p>AJAX API kapcsolat</p>
-    </aside>
+    <h2>Create</h2>
+    <form id="createForm">
+      <input type="text" id="createName" placeholder="Név">
+      <input type="text" id="createHeight" placeholder="Magasság (cm)">
+      <input type="text" id="createWeight" placeholder="Súly (kg)">
+      <button type="submit">Létrehozás</button>
+    </form>
+    <div id="createResult"></div>
 
-    <div id="content">
-        <h2>AJAX – API használat</h2>
+    <h2>Update</h2>
+    <input type="text" id="updateId" placeholder="ID lekéréshez">
+    <button onclick="getDataForId()">Adatok lekérése</button>
+    <form id="updateForm">
+      <input type="text" id="updateName" placeholder="Név">
+      <input type="text" id="updateHeight" placeholder="Magasság (cm)">
+      <input type="text" id="updateWeight" placeholder="Súly (kg)">
+      <button type="submit">Frissítés</button>
+    </form>
+    <div id="updateResult"></div>
 
-        <section>
-            <h3>Read</h3>
-            <button onclick="loadData()">Adatok betöltése</button>
-            <div id="dataContainer"></div>
-            <div id="stats"></div>
-        </section>
+    <h2>Delete</h2>
+    <input type="text" id="deleteId" placeholder="Törlendő ID">
+    <button onclick="deleteData()">Törlés</button>
+    <div id="deleteResult"></div>
+  </div>
 
-        <section>
-            <h3>Create / Update</h3>
-            <form id="dataForm">
-                <input type="text" id="id" placeholder="ID (update esetén)">
-                <input type="text" id="name" placeholder="Név" required>
-                <input type="text" id="height" placeholder="Magasság" required>
-                <input type="text" id="weight" placeholder="Súly" required>
-                <button type="submit">Mentés</button>
-                <button type="button" onclick="getDataForId()">Adatok betöltése ID alapján</button>
-            </form>
-            <div id="result"></div>
-        </section>
-
-        <section>
-            <h3>Delete</h3>
-            <input type="text" id="deleteId" placeholder="Törlendő ID">
-            <button onclick="deleteData()">Törlés</button>
-        </section>
-    </div>
-
-    <footer>
-        <p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p>
-    </footer>
+  <footer><p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p></footer>
 </body>
 </html>
-
-
-
