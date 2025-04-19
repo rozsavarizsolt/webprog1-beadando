@@ -1,5 +1,5 @@
 const url = 'https://demoserver.hu/AjaxApi.php';
-const code = 'W8C9XJmma123';
+const code = 'CSZS98rz315';
 
 async function kiolvasas(){
     let response = await fetch(url, {
