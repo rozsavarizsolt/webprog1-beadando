@@ -1,4 +1,4 @@
-const url = 'https://demoserver.hu/AjaxApi.php';
+const url = 'https://retoolapi.dev/CSZS98rz315/adatok';
 const code = 'CSZS98rz315';
 
 async function kiolvasas(){
