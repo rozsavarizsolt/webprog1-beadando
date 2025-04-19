@@ -1,20 +1,21 @@
+
 let chart;
 
 window.addEventListener('DOMContentLoaded', () => {
   const table = document.getElementById('chartTable');
-  const rows = table.querySelectorAll('tr');
+  const rows = table.querySelectorAll('tbody tr');
 
   rows.forEach((row, index) => {
     row.addEventListener('click', () => {
       const values = Array.from(row.querySelectorAll('td')).map(td => parseFloat(td.textContent));
-      drawChart(values, index + 1);
+      drawChart(values, `Év ${index + 1}`);
     });
   });
 });
 
-function drawChart(data, rowIndex) {
+function drawChart(data, label) {
   const ctx = document.getElementById('chartCanvas').getContext('2d');
-  const labels = data.map((_, i) => `Oszlop ${i + 1}`);
+  const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jún', 'Júl', 'Aug', 'Szept', 'Okt', 'Nov', 'Dec'];
 
   if (chart) {
     chart.destroy();
@@ -25,16 +26,22 @@ function drawChart(data, rowIndex) {
     data: {
       labels: labels,
       datasets: [{
-        label: `${rowIndex}. sor adatai`,
+        label: `${label} havi középhőmérsékletek (°C)`,
         data: data,
-        borderWidth: 2
+        borderWidth: 2,
+        fill: false,
+        tension: 0.3
       }]
     },
     options: {
       responsive: true,
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Hőmérséklet (°C)'
+          }
         }
       }
     }
