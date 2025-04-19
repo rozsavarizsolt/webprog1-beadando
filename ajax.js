@@ -1,82 +1,168 @@
-const API_URL = "https://retoolapi.dev/CSZS98rz315/adatok";
+const url = 'https://demoserver.hu/AjaxApi.php';
+const code = 'W8C9XJmma123';
 
-function loadData() {
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      const container = document.getElementById("dataContainer");
-      container.innerHTML = "";
-      data.forEach(d => {
-        const item = document.createElement("p");
-        item.textContent = `ID: ${d.id}, Név: ${d.name}, Magasság: ${d.height}, Súly: ${d.weight}`;
-        container.appendChild(item);
-      });
-
-      const heights = data.map(d => Number(d.height)).filter(n => !isNaN(n));
-      const sum = heights.reduce((a, b) => a + b, 0);
-      const avg = (sum / heights.length).toFixed(2);
-      const max = Math.max(...heights);
-      document.getElementById("stats").innerHTML = `
-        <p>Magasságok összege: ${sum}</p>
-        <p>Magasságok átlaga: ${avg}</p>
-        <p>Legnagyobb magasság: ${max}</p>
-      `;
+async function kiolvasas(){
+    let response = await fetch(url, {
+        method: 'post',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: "code="+code+"&op=read"
     });
+    let data = await response.text();
+    data = JSON.parse(data);
+    let list = data.list;
+
+    str = "<p>Rekordok száma: " + data.rowCount + "</p>";
+    str += "<table><tr><th>ID</th><th>Név</th><th>Magasság</th><th>Súly</th></tr>";
+
+    let osszeg = 0;
+    let maxHeight = 0;
+
+    for(let i = 0; i < list.length; i++){
+        let height = parseFloat(list[i].height);
+        osszeg += height;
+
+        if (height > maxHeight) {
+            maxHeight = height;
+        }
+
+        str += "<tr><td>" + list[i].id + "</td><td>" + list[i].name + "</td><td>" + list[i].height + "</td><td>" + list[i].weight + "</td></tr>";
+    }
+
+    let atlag = list.length > 0 ? (osszeg / list.length).toFixed(2) : 0;
+
+    str += "</table>";
+    str += `<p>Magasságok összege: ${osszeg}</p>`;
+    str += `<p>Magasságok átlaga: ${atlag}</p>`;
+    str += `<p>Legnagyobb magasság: ${maxHeight}</p>`;
+
+    document.getElementById("readResult").innerHTML = str;
+    document.getElementById("createResult").innerHTML = "";
+    document.getElementById("updateResult").innerHTML = "";
+    document.getElementById("deleteResult").innerHTML = "";
 }
 
-function validate(name, height, weight) {
-  if (!name || !height || !weight) return "Minden mező kötelező!";
-  if (name.length > 30 || height.length > 30 || weight.length > 30) return "Max. 30 karakter!";
-  return null;
+async function letrehozas() {
+    nameStr = document.getElementById("name").value;
+    weight = document.getElementById("weight").value;
+    height = document.getElementById("height").value;
+
+    if (nameStr.length > 0 && nameStr.length <= 30 && weight.length > 0 && weight.length <= 30 && height.length > 0 && height.length <= 30) {
+        let response = await fetch(url, {
+            method: 'post',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: "code=" + code + "&op=create&name=" + nameStr + "&height=" + height + "&weight=" + weight
+        });
+
+        let data = await response.text();
+
+        if(data > 0){
+            str = "Sikeres létrehozás!";
+        }
+        else{
+            str = "Hiba történt a létrehozás során!";
+        }
+
+        document.getElementById("createResult").innerHTML = str;
+        document.getElementById("name").value = "";
+        document.getElementById("weight").value = "";
+        document.getElementById("height").value = "";
+    }else{
+        document.getElementById("createResult").innerHTML = "Validációs hiba!";
+    }
 }
 
-document.getElementById("createForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const name = document.getElementById("createName").value.trim();
-  const height = document.getElementById("createHeight").value.trim();
-  const weight = document.getElementById("createWeight").value.trim();
-  const error = validate(name, height, weight);
-  if (error) return document.getElementById("createResult").textContent = error;
-
-  fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, height, weight })
-  }).then(res => res.ok ? "Sikeres létrehozás!" : "Hiba történt!")
-    .then(msg => document.getElementById("createResult").textContent = msg);
-});
-
-function getDataForId() {
-  const id = document.getElementById("updateId").value.trim();
-  fetch(`${API_URL}/${id}`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("updateName").value = data.name || "";
-      document.getElementById("updateHeight").value = data.height || "";
-      document.getElementById("updateWeight").value = data.weight || "";
+async function getDataForId() {
+    let response = await fetch(url, {
+        method: 'post',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: "code=" + code + "&op=read"
     });
+
+    let data = await response.text();
+    data = JSON.parse(data);
+    let list = data.list;
+
+    for(let i = 0; i < list.length; i++){
+        if (list[i].id == document.getElementById("searchId").value) {
+            document.getElementById("updateName").value = list[i].name;
+            document.getElementById("updateWeight").value = list[i].weight;
+            document.getElementById("updateHeight").value = list[i].height;
+        }
+    }
 }
 
-document.getElementById("updateForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const id = document.getElementById("updateId").value.trim();
-  const name = document.getElementById("updateName").value.trim();
-  const height = document.getElementById("updateHeight").value.trim();
-  const weight = document.getElementById("updateWeight").value.trim();
-  const error = validate(name, height, weight);
-  if (error) return document.getElementById("updateResult").textContent = error;
+async function frissites() {
+    id = document.getElementById("searchId").value;
+    nameStr = document.getElementById("updateName").value;
+    height = document.getElementById("updateHeight").value;
+    weight = document.getElementById("updateWeight").value;
 
-  fetch(`${API_URL}/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, height, weight })
-  }).then(res => res.ok ? "Sikeres frissítés!" : "Hiba frissítéskor!")
-    .then(msg => document.getElementById("updateResult").textContent = msg);
-});
+    if (nameStr.length > 0 && nameStr.length <= 30 && height.length > 0 && height.length <= 30 && weight.length > 0 && weight.length <= 30) {
+        let response = await fetch(url, {
+            method: 'post',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: "code=" + code + "&op=update&id=" + id + "&name=" + nameStr + "&height=" + height + "&weight=" + weight
+        });
 
-function deleteData() {
-  const id = document.getElementById("deleteId").value.trim();
-  fetch(`${API_URL}/${id}`, { method: "DELETE" })
-    .then(res => res.ok ? "Sikeres törlés!" : "Hiba történt!")
-    .then(msg => document.getElementById("deleteResult").textContent = msg);
+        let data = await response.text();
+        if (data > 0) {
+            str = "Sikeres frissítés!";
+        }else{
+            str = "Hiba történt a frissítés során!";
+        }
+
+        document.getElementById("updateResult").innerHTML = str;
+
+        document.getElementById("searchId").value = "";
+        document.getElementById("updateName").value = "";
+        document.getElementById("updateHeight").value = "";
+        document.getElementById("updateWeight").value = "";
+    }
+    else{
+        document.getElementById("updateResult").innerHTML = "Validációs hiba!";
+    }
 }
+
+async function torles(){
+    id = document.getElementById("deleteId").value;
+    if (id.length > 0 && id.length <= 30) {
+        let response = await fetch(url, {
+            method: 'post',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: "code=" + code + "&op=delete&id=" + id
+        });
+
+        let data = await response.text();
+        if(data > 0){
+            str = "Sikeres törlés!";
+        }
+        else{
+            str = "Hiba történt a törlés közben.";
+        }
+
+        document.getElementById("deleteResult").innerHTML = str;
+        document.getElementById("deleteId").value = "";
+    }
+    else{
+        document.getElementById("deleteResult").innerHTML = "Validációs hiba!";
+    }
+}
+
+window.onload = function(){
+    kiolvasas();
+};
