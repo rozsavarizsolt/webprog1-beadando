@@ -1,65 +1,59 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJAX példa</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="ajax.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChartJS – Időjárás napló</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="chartjs.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Web-programozás-1 Előadás Házi feladat</h1>
-    </header>
+  <header>
+    <h1>Web-programozás-1 Előadás Házi feladat</h1>
+  </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Kezdőlap</a></li>
-            <li><a href="tablazat.html">Táblázat</a></li>
-            <li><a href="html5.html">HTML5</a></li>
-            <li class="active"><a href="chartjs.html">ChartJS</a></li>
-            <li><a href="ajax.html">AJAX</a></li>
-            <li><a href="oojs.html">OOJS</a></li>
-            <li><a href="react.html">React</a></li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="index.html">Kezdőlap</a></li>
+      <li><a href="tablazat.html">Táblázat</a></li>
+      <li><a href="html5.html">HTML5</a></li>
+      <li class="active"><a href="chartjs.html">ChartJS</a></li>
+      <li><a href="ajax.html">AJAX</a></li>
+      <li><a href="oojs.html">OOJS</a></li>
+      <li><a href="react.html">React</a></li>
+    </ul>
+  </nav>
 
-    <aside>
-        <p>AJAX API kapcsolat</p>
-    </aside>
+  <aside>
+    <p>Havi időjárás diagram</p>
+  </aside>
 
-    <div id="content">
-        <h2>AJAX – API használat</h2>
+  <div id="content">
+    <h2>Chart.js – Havi középhőmérséklet diagram</h2>
+    <p>Kattints egy sorra az adott év havi átlaghőmérsékletének megjelenítéséhez!</p>
 
-        <section>
-            <h3>Read</h3>
-            <button onclick="loadData()">Adatok betöltése</button>
-            <div id="dataContainer"></div>
-            <div id="stats"></div>
-        </section>
+    <table id="chartTable">
+      <thead>
+        <tr>
+          <th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>Maj</th>
+          <th>Jún</th><th>Júl</th><th>Aug</th><th>Szept</th><th>Okt</th>
+          <th>Nov</th><th>Dec</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2</td><td>3</td><td>7</td><td>12</td><td>18</td><td>22</td><td>25</td><td>24</td><td>19</td><td>13</td><td>7</td><td>3</td></tr>
+        <tr><td>1</td><td>2</td><td>8</td><td>13</td><td>17</td><td>21</td><td>24</td><td>23</td><td>18</td><td>12</td><td>6</td><td>2</td></tr>
+        <tr><td>-1</td><td>0</td><td>5</td><td>10</td><td>16</td><td>20</td><td>23</td><td>22</td><td>17</td><td>11</td><td>5</td><td>1</td></tr>
+      </tbody>
+    </table>
 
-        <section>
-            <h3>Create / Update</h3>
-            <form id="dataForm">
-                <input type="text" id="id" placeholder="ID (update esetén)">
-                <input type="text" id="name" placeholder="Név" required>
-                <input type="text" id="height" placeholder="Magasság" required>
-                <input type="text" id="weight" placeholder="Súly" required>
-                <button type="submit">Mentés</button>
-                <button type="button" onclick="getDataForId()">Adatok betöltése ID alapján</button>
-            </form>
-            <div id="result"></div>
-        </section>
+    <canvas id="chartCanvas" width="800" height="400"></canvas>
+  </div>
 
-        <section>
-            <h3>Delete</h3>
-            <input type="text" id="deleteId" placeholder="Törlendő ID">
-            <button onclick="deleteData()">Törlés</button>
-        </section>
-    </div>
-
-    <footer>
-        <p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p>
-    </footer>
+  <footer>
+    <p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p>
+  </footer>
 </body>
 </html>
+
