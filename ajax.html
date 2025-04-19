@@ -16,12 +16,12 @@
   <aside><p>AJAX API kapcsolat</p></aside>
 
   <div id="content">
-    <h2>Read</h2>
+    <h2>Read (Listázás)</h2>
     <button onclick="loadData()">Adatok betöltése</button>
-    <div id="dataContainer"></div>
-    <div id="stats"></div>
+    <div id="dataContainer" style="margin-top: 1rem;"></div>
+    <div id="stats" style="margin-top: 1rem;"></div>
 
-    <h2>Create</h2>
+    <h2 style="margin-top:2em;">Create (Létrehozás)</h2>
     <form id="createForm">
       <input type="text" id="createName" placeholder="Név">
       <input type="text" id="createHeight" placeholder="Magasság (cm)">
@@ -30,7 +30,7 @@
     </form>
     <div id="createResult"></div>
 
-    <h2>Update</h2>
+    <h2 style="margin-top:2em;">Update (Módosítás)</h2>
     <input type="text" id="updateId" placeholder="ID lekéréshez">
     <button onclick="getDataForId()">Adatok lekérése</button>
     <form id="updateForm">
@@ -41,7 +41,7 @@
     </form>
     <div id="updateResult"></div>
 
-    <h2>Delete</h2>
+    <h2 style="margin-top:2em;">Delete (Törlés)</h2>
     <input type="text" id="deleteId" placeholder="Törlendő ID">
     <button onclick="deleteData()">Törlés</button>
     <div id="deleteResult"></div>
