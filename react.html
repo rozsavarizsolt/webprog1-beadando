@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React SPA</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <meta charset="UTF-8" />
+  <title>React SPA alkalmazások</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Web-programozás-1 Előadás Házi feladat</h1>
-    </header>
+  <header>
+    <h1>Web-programozás-1 Előadás Házi feladat</h1>
+  </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Kezdőlap</a></li>
-            <li><a href="tablazat.html">Táblázat</a></li>
-            <li><a href="html5.html">HTML5</a></li>
-            <li><a href="chartjs.html">ChartJS</a></li>
-            <li><a href="ajax.html">AJAX</a></li>
-            <li><a href="oojs.html">OOJS</a></li>
-            <li class="active"><a href="react.html">React</a></li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="index.html">Kezdőlap</a></li>
+      <li><a href="tablazat.html">Táblázat</a></li>
+      <li><a href="html5.html">HTML5 API</a></li>
+      <li><a href="chartjs.html">ChartJS</a></li>
+      <li><a href="ajax.html">AJAX</a></li>
+      <li><a href="oojs.html">OOJS</a></li>
+      <li class="active"><a href="react.html">React</a></li>
+    </ul>
+  </nav>
 
-    <aside>
-        <p>React SPA</p>
-    </aside>
+  <aside>
+    <p>React SPA alkalmazások</p>
+  </aside>
 
-    <div id="content">
-        <div id="root"></div>
-    </div>
+  <div id="content" style="text-align: center">
+    <h2>Válassz egy alkalmazást:</h2>
+    <button onclick="loadApp('app1')">Számláló</button>
+    <button onclick="loadApp('app2')">Memóriajáték</button>
 
-    <footer>
-        <p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p>
-    </footer>
+    <iframe id="reactFrame" src="" width="100%" height="500" style="border:none; margin-top: 1rem;"></iframe>
+  </div>
 
-    <script type="text/babel" src="react-app.js"></script>
+  <footer>
+    <p>Rózsavári Zsolt – Neptun kód: D3TOTJ</p>
+  </footer>
+
+  <script>
+    function loadApp(app) {
+      const frame = document.getElementById("reactFrame");
+      frame.src = app === "app1" ? "react/app1-counter/dist/index.html" : "react/app2-memory/dist/index.html";
+    }
+  </script>
 </body>
 </html>
