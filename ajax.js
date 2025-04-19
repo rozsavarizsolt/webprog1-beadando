@@ -5,18 +5,21 @@ function loadData() {
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById("dataContainer");
-      container.innerHTML = data.map(d => `
-        <div>ID: ${d.id}, Név: ${d.name}, Magasság: ${d.height}, Súly: ${d.weight}</div>
-      `).join("");
+      container.innerHTML = "";
+      data.forEach(d => {
+        const item = document.createElement("p");
+        item.textContent = `ID: ${d.id}, Név: ${d.name}, Magasság: ${d.height}, Súly: ${d.weight}`;
+        container.appendChild(item);
+      });
 
       const heights = data.map(d => Number(d.height)).filter(n => !isNaN(n));
       const sum = heights.reduce((a, b) => a + b, 0);
       const avg = (sum / heights.length).toFixed(2);
       const max = Math.max(...heights);
       document.getElementById("stats").innerHTML = `
-        <p>Összeg: ${sum}</p>
-        <p>Átlag: ${avg}</p>
-        <p>Legnagyobb: ${max}</p>
+        <p>Magasságok összege: ${sum}</p>
+        <p>Magasságok átlaga: ${avg}</p>
+        <p>Legnagyobb magasság: ${max}</p>
       `;
     });
 }
